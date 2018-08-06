@@ -1,0 +1,25 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="space_smaller">3dp</dimen>
+    <dimen name="space_mini">5dp</dimen>
+    <dimen name="space_normal">8dp</dimen>
+    <dimen name="space_middle">12dp</dimen>
+    <dimen name="space_large">16dp</dimen>
+    <dimen name="space_xlarge">24dp</dimen>
+    <dimen name="space_xxlarge">32dp</dimen>
+
+    <dimen name="toolbar_size">48dp</dimen>
+    <dimen name="footbar_size">50dp</dimen>
+
+    <!--字体大小-->
+    <dimen name="h30">30sp</dimen>
+    <dimen name="h24">24sp</dimen>
+    <dimen name="h18">18sp</dimen>
+    <dimen name="h16">16sp</dimen>
+    <dimen name="h15">15sp</dimen>
+    <dimen name="h14">14sp</dimen>
+    <dimen name="h13">13sp</dimen>
+    <dimen name="h12">12sp</dimen>
+    <dimen name="h11">11sp</dimen>
+    <dimen name="h10">10sp</dimen>
+</resources>

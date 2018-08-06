@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\work\\bigfamily_android\\IMKit\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-sq\\values-sq.xml",
+            "outputFile": "G:\\bigfamily_android\\IMKit\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-sq\\values-sq.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\suncheng\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.0.0.aar\\42d436e01475db77ae1526c8faa4cedc\\res\\values-sq\\values-sq.xml",
+                    "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.0.0.aar\\dd5c910512f39e526b3948ed36981d6a\\res\\values-sq\\values-sq.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

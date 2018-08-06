@@ -1,19 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.sunc.bigfamily.MainActivity">
+<layout>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/window_background">
+        <include
+            layout="@layout/layout_title_bar"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        <FrameLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/toolbar_size"
+            android:layout_marginBottom="@dimen/footbar_size" />
 
-</android.support.constraint.ConstraintLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space_mini"
+            android:layout_above="@+id/footer"
+            android:background="@drawable/showdow_bottom"
+            android:visibility="visible"/>
+
+        <LinearLayout
+            android:id="@+id/footer"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/footbar_size"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/bg_footer"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_tree"
+                style="@style/footer_text"
+                android:drawableTop="@mipmap/ic_tab_group"
+                android:drawableTint="@color/footer_text"
+                android:paddingTop="8dp"
+                android:text="家谱" />
+
+            <TextView
+                android:id="@+id/tv_chat"
+                style="@style/footer_text"
+                android:drawableTop="@mipmap/ic_tab_chat"
+                android:drawableTint="@color/footer_text"
+                android:paddingTop="8dp"
+                android:text="家常" />
+
+            <TextView
+                android:id="@+id/tv_moment"
+                style="@style/footer_text"
+                android:drawableTop="@mipmap/ic_tab_moment"
+                android:drawableTint="@color/footer_text"
+                android:paddingTop="8dp"
+                android:text="家事" />
+        </LinearLayout>
+    </RelativeLayout>
+</layout>
