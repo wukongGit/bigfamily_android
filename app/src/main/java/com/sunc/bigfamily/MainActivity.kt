@@ -22,8 +22,8 @@ class MainActivity : BaseBindingActivity<ActivityMainBinding>() {
     override fun initView(savedInstanceState: Bundle?) {
         mTabManager = TabManager(this, supportFragmentManager, R.id.container)
         mTabManager.addTab(TREE, TreeFragment::class.java, null)
-                .addTab(CHAT, TreeFragment::class.java, null)
-                .addTab(MOMENT, TreeFragment::class.java, null)
+                .addTab(CHAT, ChatFragment::class.java, null)
+                .addTab(MOMENT, MomentFragment::class.java, null)
         mTabManager.setOnTabChangedListener { tabId ->
             if (tabId != null) {
                 this@MainActivity.onTabChanged(tabId)

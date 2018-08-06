@@ -75,8 +75,8 @@ class SplashActivity : BaseBindingActivity<ActivitySplashBinding>() {
             compositeSubscription.unsubscribe()
         }
         val sp = getSharedPreferences("config", Context.MODE_PRIVATE)
-        //val cacheToken = "hE/OJW+y2Cq8sXxU6fORvFtkutf0UcSFzGVFXG656Ep/Bg+b27kQHWWKD/s4ncqIf6ykIUK/bvt7ry8jo9Dfd7de/+YaWLrs"
-        val cacheToken = sp.getString("loginToken", "")
+        val cacheToken = "1MX23Ta6D5Bp02DYMA/8Hltkutf0UcSFzGVFXG656Ep/Bg+b27kQHXZlWONM06o+MIYLyT9Euii3Xv/mGli67A=="
+        //val cacheToken = sp.getString("loginToken", "")
         if (!TextUtils.isEmpty(cacheToken)) {
             connect(cacheToken)
         } else {
