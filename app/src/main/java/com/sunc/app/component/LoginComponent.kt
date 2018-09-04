@@ -1,6 +1,7 @@
 package com.sunc.app.component
 
 import com.sunc.bigfamily.LoginActivity
+import com.sunc.bigfamily.RegisterActivity
 import com.sunc.mvp.contract.LoginContract
 import dagger.Module
 import dagger.Provides
@@ -12,6 +13,7 @@ import dagger.Subcomponent
 @Subcomponent(modules = arrayOf(LoginModule::class))
 interface LoginComponent {
     fun inject(activity: LoginActivity)
+    fun inject(activity: RegisterActivity)
 }
 
 @Module

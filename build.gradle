@@ -26,6 +26,7 @@ ext {
     minSdkVersion = MIN_SDK_VERSION.toInteger()
     targetSdkVersion = TARGET_SDK_VERSION.toInteger()
     compileSdkVersion = COMPILE_SDK_VERSION.toInteger()
+    buildToolsVersion = "${BUILD_TOOLS_VERSION}"
     versionCode = APP_VERSION_CODE.toInteger()
     versionName = "${APP_VERSION_NAME}"
     javaVersion = JavaVersion.VERSION_1_7

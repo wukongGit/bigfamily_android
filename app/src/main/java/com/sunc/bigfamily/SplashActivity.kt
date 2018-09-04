@@ -1,6 +1,5 @@
 package com.sunc.bigfamily
 
-import android.content.Context
 import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
@@ -10,6 +9,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.sunc.base.BaseBindingActivity
 import com.sunc.bigfamily.databinding.ActivitySplashBinding
+import com.sunc.db.SharedPreferencesHelper
+import com.sunc.utils.NetUtils
 import com.sunc.utils.StatusBarUtils.setTranslucentStatus
 import io.rong.imkit.RongIM
 import io.rong.imlib.RongIMClient
@@ -74,15 +75,14 @@ class SplashActivity : BaseBindingActivity<ActivitySplashBinding>() {
         if(compositeSubscription.hasSubscriptions()){
             compositeSubscription.unsubscribe()
         }
-        val sp = getSharedPreferences("config", Context.MODE_PRIVATE)
-        val cacheToken = "1MX23Ta6D5Bp02DYMA/8Hltkutf0UcSFzGVFXG656Ep/Bg+b27kQHXZlWONM06o+MIYLyT9Euii3Xv/mGli67A=="
-        //val cacheToken = sp.getString("loginToken", "")
+        val cacheToken : String = "kBa61y2LVXcCOcCwDTCPkrooypZGe+yv3FZ7LUNrNB01d7sA8yR2yYjmi5SH6nXnGFGKL+b5Z61w6jbjVKKMkA==";//SharedPreferencesHelper.getInstance().getData(SharedPreferencesHelper.CONFIG_TOKEN, "").toString()
         if (!TextUtils.isEmpty(cacheToken)) {
-            connect(cacheToken)
+            if (NetUtils.isConnected(this)) {
+                connect(cacheToken)
+            }
         } else {
             goToLogin()
         }
-
     }
 
     private fun goToMain() {

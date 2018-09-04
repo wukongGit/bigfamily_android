@@ -3,6 +3,7 @@ package com.sunc.app
 import android.support.multidex.MultiDexApplication
 import android.app.ActivityManager
 import android.content.Context
+import com.sunc.db.SharedPreferencesHelper
 import io.rong.imkit.RongIM
 import javax.inject.Inject
 
@@ -26,6 +27,7 @@ class App : MultiDexApplication() {
     override fun onCreate() {
         super.onCreate()
         DaggerApiComponent.builder().apiModule(ApiModule()).appModule(AppModule(this)).build().inject(this)
+        SharedPreferencesHelper.init(this)
         if (applicationInfo.packageName == getCurProcessName(applicationContext)) {
             RongIM.init(this)
         }

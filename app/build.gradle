@@ -18,7 +18,6 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
 
-        multiDexEnabled true
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
@@ -53,19 +52,17 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-
     implementation "com.android.support:multidex:${MULTIDEX_VERSION}"
     implementation "com.android.support:design:${DESIGN_VERSION}"
     implementation "com.android.support:appcompat-v7:${APPCOMPAT_V7_VERSION}"
     implementation "com.android.support:cardview-v7:${CARDVIEW_VERSION}"
     implementation "com.android.support.constraint:constraint-layout:${CONSTRAINT_LAYOUT_VERSION}"
+
     // Platform bindings:
     implementation "com.jakewharton.rxbinding:rxbinding:${RXBINDING_VERSION}"
-
     implementation "com.tbruyelle.rxpermissions:rxpermissions:${RXPERMISSIONS_VERSION}"
-
     implementation "com.google.dagger:dagger:${DAGGER_VERSION}"
     implementation 'com.android.support:support-v4:26.1.0'
     implementation 'com.android.support:support-vector-drawable:26.1.0'
@@ -76,13 +73,16 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:${RETROFIT_VERSION}"
     implementation "com.squareup.retrofit2:converter-jackson:${CONVERTER_JACKSON_VERSION}"
     implementation "com.squareup.retrofit2:adapter-rxjava:${ADAPTER_RXJAVA_VERSION}"
+
     // http://stackoverflow.com/questions/32514410/logging-with-retrofit-2
     implementation "com.squareup.okhttp3:logging-interceptor:${OKHTTP3_LOGGING_INTERCEPTOR_VERSION}"
     implementation "com.github.bumptech.glide:glide:${GLIDE_VERSION}"
-    implementation 'com.alibaba:fastjson:1.2.33'
+    implementation "com.squareup:otto:${EVENTBUS_OTTO_VERSION}"
+    implementation "com.ogaclejapan.smarttablayout:library:${SMARTTABLAYOUT_LIB_VERSION}"
+    implementation "com.ogaclejapan.smarttablayout:utils-v4:${SMARTTABLAYOUT_UTILS_VERSION}"
+
     //https://github.com/wukongGit/ImagePicker
     implementation "com.lzy.widget:imagepicker:${IMAGE_PICKER_VERSION}"
     implementation "com.orhanobut:dialogplus:${DIALOG_PLUS_VERSION}"
-
-    compile project(':IMKit')
+    compile project(':imkit2')
 }

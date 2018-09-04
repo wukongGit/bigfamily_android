@@ -2,7 +2,9 @@ package com.sunc.app
 
 import android.content.Context
 import android.util.Log
+import com.sunc.api.CookiesInterceptor
 import com.sunc.api.FamilyApi
+import com.sunc.api.SetCookiesInterceptor
 import dagger.Module
 import dagger.Provides
 import okhttp3.Cache
@@ -32,9 +34,12 @@ class ApiModule {
         val cacheSize = 1024 * 1024 * 10L
         val cacheDir = File(context.cacheDir, "http")
         val cache = Cache(cacheDir, cacheSize)
-        return OkHttpClient.Builder()
-                .cache(cache)
-                .addInterceptor(interceptor).build()
+        val builder = OkHttpClient.Builder()
+        builder.cache(cache)
+        builder.addInterceptor(CookiesInterceptor())
+        builder.addInterceptor(interceptor)
+        builder.interceptors().add(SetCookiesInterceptor())
+        return builder.build()
     }
     @Provides fun provideInterceptor() :HttpLoggingInterceptor{
         val interceptor = HttpLoggingInterceptor{
