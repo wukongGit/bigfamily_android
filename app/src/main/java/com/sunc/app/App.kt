@@ -27,8 +27,9 @@ class App : MultiDexApplication() {
     override fun onCreate() {
         super.onCreate()
         DaggerApiComponent.builder().apiModule(ApiModule()).appModule(AppModule(this)).build().inject(this)
-        SharedPreferencesHelper.init(this)
         if (applicationInfo.packageName == getCurProcessName(applicationContext)) {
+            SharedPreferencesHelper.init(this)
+            SealAppContext.init(this)
             RongIM.init(this)
         }
     }

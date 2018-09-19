@@ -4,16 +4,15 @@ import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.sunc.app.SealAppContext
 import com.sunc.base.BaseBindingActivity
 import com.sunc.bigfamily.databinding.ActivitySplashBinding
 import com.sunc.db.SharedPreferencesHelper
 import com.sunc.utils.NetUtils
 import com.sunc.utils.StatusBarUtils.setTranslucentStatus
 import io.rong.imkit.RongIM
-import io.rong.imlib.RongIMClient
 import kotlinx.android.synthetic.main.activity_splash.*
 import rx.Observable
 import rx.Observer
@@ -24,6 +23,7 @@ import java.util.concurrent.TimeUnit
 class SplashActivity : BaseBindingActivity<ActivitySplashBinding>() {
     val TAG = "SplashActivity"
     private val picUrl = "http://api.dujin.org/bing/1920.php"
+    private var token : String? = null
     private var compositeSubscription = CompositeSubscription()
 
     override fun createDataBinding(savedInstanceState: Bundle?): ActivitySplashBinding {
@@ -37,6 +37,7 @@ class SplashActivity : BaseBindingActivity<ActivitySplashBinding>() {
     }
 
     private fun startUp() {
+        connect()
         compositeSubscription.add(countDown(3)
                 .doOnSubscribe({ tv_skip.text = "跳过 4" })
                 .subscribe(object : Observer<Int> {
@@ -75,11 +76,8 @@ class SplashActivity : BaseBindingActivity<ActivitySplashBinding>() {
         if(compositeSubscription.hasSubscriptions()){
             compositeSubscription.unsubscribe()
         }
-        val cacheToken : String = "kBa61y2LVXcCOcCwDTCPkrooypZGe+yv3FZ7LUNrNB01d7sA8yR2yYjmi5SH6nXnGFGKL+b5Z61w6jbjVKKMkA==";//SharedPreferencesHelper.getInstance().getData(SharedPreferencesHelper.CONFIG_TOKEN, "").toString()
-        if (!TextUtils.isEmpty(cacheToken)) {
-            if (NetUtils.isConnected(this)) {
-                connect(cacheToken)
-            }
+        if (!TextUtils.isEmpty(token)) {
+            goToMain()
         } else {
             goToLogin()
         }
@@ -95,33 +93,13 @@ class SplashActivity : BaseBindingActivity<ActivitySplashBinding>() {
         finish()
     }
 
-    private fun connect(token: String) {
-        RongIM.connect(token, object : RongIMClient.ConnectCallback() {
-            /**
-             * Token 错误。可以从下面两点检查 1.  Token 是否过期，如果过期您需要向 App Server 重新请求一个新的 Token
-             * 2.  token 对应的 appKey 和工程里设置的 appKey 是否一致
-             */
-            override fun onTokenIncorrect() {
-                Log.d(TAG, "onTokenIncorrect:")
+    private fun connect() {
+        token = "oia7zLjQEIpMX3IBdVwW5Ftkutf0UcSFzGVFXG656EpTLGvlpO0h+CXgCwuLp4BHOGHMM/4XZQG7oVM/PE23QQ==";//SharedPreferencesHelper.getInstance().getData(SharedPreferencesHelper.CONFIG_TOKEN, "").toString()
+        if (!TextUtils.isEmpty(token)) {
+            if (NetUtils.isConnected(this)) {
+                RongIM.connect(token, SealAppContext.getInstance().connectCallback)
             }
-
-            /**
-             * 连接融云成功
-             * @param userid 当前 token 对应的用户 id
-             */
-            override fun onSuccess(userid: String) {
-                Log.d(TAG, "onSuccess:$userid")
-                goToMain()
-            }
-
-            /**
-             * 连接融云失败
-             * @param errorCode 错误码，可到官网 查看错误码对应的注释
-             */
-            override fun onError(errorCode: RongIMClient.ErrorCode) {
-                Log.d(TAG, "onError:$errorCode")
-            }
-        })
+        }
     }
 
     override fun onDestroy() {

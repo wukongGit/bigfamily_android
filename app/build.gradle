@@ -49,6 +49,17 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    packagingOptions {
+        exclude 'AndroidManifest.xml'
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
 }
 
 dependencies {
@@ -86,3 +97,4 @@ dependencies {
     implementation "com.orhanobut:dialogplus:${DIALOG_PLUS_VERSION}"
     compile project(':imkit2')
 }
+

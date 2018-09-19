@@ -10,6 +10,7 @@ import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import android.view.View
 import com.sunc.app.DataModel
+import com.sunc.app.SealAppContext
 import com.sunc.app.component.LoginModule
 import com.sunc.base.BaseBindingActivity
 import com.sunc.bean.LoginData
@@ -21,7 +22,6 @@ import com.sunc.utils.BlankUtils
 import com.sunc.utils.getMainComponent
 import com.sunc.utils.toast
 import io.rong.imkit.RongIM
-import io.rong.imlib.RongIMClient
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.layout_title_bar.*
 import javax.inject.Inject
@@ -37,7 +37,8 @@ class LoginActivity : BaseBindingActivity<ActivityLoginBinding>(), LoginContract
             val token = model.data.token
             Log.d(TAG, "$user, $token")
             SharedPreferencesHelper.getInstance().saveData(SharedPreferencesHelper.CONFIG_TOKEN, token)
-            connect(token)
+            RongIM.connect(token, SealAppContext.getInstance().connectCallback)
+            goToMain()
         } else {
             toast(model.message)
         }
@@ -88,35 +89,6 @@ class LoginActivity : BaseBindingActivity<ActivityLoginBinding>(), LoginContract
     private fun goToRegister() {
         startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
         finish()
-    }
-
-    private fun connect(token: String) {
-        RongIM.connect(token, object : RongIMClient.ConnectCallback() {
-            /**
-             * Token 错误。可以从下面两点检查 1.  Token 是否过期，如果过期您需要向 App Server 重新请求一个新的 Token
-             * 2.  token 对应的 appKey 和工程里设置的 appKey 是否一致
-             */
-            override fun onTokenIncorrect() {
-                Log.d(TAG, "onTokenIncorrect:")
-            }
-
-            /**
-             * 连接融云成功
-             * @param userid 当前 token 对应的用户 id
-             */
-            override fun onSuccess(userid: String) {
-                Log.d(TAG, "onSuccess:$userid")
-                goToMain()
-            }
-
-            /**
-             * 连接融云失败
-             * @param errorCode 错误码，可到官网 查看错误码对应的注释
-             */
-            override fun onError(errorCode: RongIMClient.ErrorCode) {
-                Log.d(TAG, "onError:$errorCode")
-            }
-        })
     }
 
 }
